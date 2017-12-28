@@ -441,6 +441,7 @@ public class ExtensionLoader<T> {
 
     @SuppressWarnings("unchecked")
     public T getAdaptiveExtension() {
+    	System.out.println(this.type.getName());
         Object instance = cachedAdaptiveInstance.get();
         if (instance == null) {
             if (createAdaptiveInstanceError == null) {
@@ -611,6 +612,7 @@ public class ExtensionLoader<T> {
                                 if (ci >= 0) line = line.substring(0, ci);
                                 line = line.trim();
                                 if (line.length() > 0) {
+                                	System.err.println(line);
                                     try {
                                         String name = null;
                                         int i = line.indexOf('=');

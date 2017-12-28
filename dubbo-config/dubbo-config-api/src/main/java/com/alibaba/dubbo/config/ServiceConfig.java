@@ -93,6 +93,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
     private volatile String generic;
 
     public ServiceConfig() {
+    	System.out.println("ServiceConfig 构造方法");
     }
 
     public ServiceConfig(Service service) {
