@@ -495,6 +495,11 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                         if (logger.isInfoEnabled()) {
                             logger.info("Register dubbo service " + interfaceClass.getName() + " url " + url + " to registry " + registryURL);
                         }
+                        /**
+                         * 提供者端的invoker封装了服务实现类、URL、Type，状态均是只读，线程安全，是Dubbo中核心模型，Dubbo中的是实体域，其他所有模型都向它靠拢或转化成它，
+                         * 是一个可执行体，通过发起invoke来具体调用服务类，它可能是个本地实现类，也可能是个远程实现类，也可能是个集群实现invoker，
+                         * 由ProxyFactory产生，具体是AbstractProxyInvoker
+                         */
                         Invoker<?> invoker = proxyFactory.getInvoker(ref, (Class) interfaceClass, registryURL.addParameterAndEncoded(Constants.EXPORT_KEY, url.toFullString()));
 
                         Exporter<?> exporter = protocol.export(invoker);
@@ -518,6 +523,11 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                     .setProtocol(Constants.LOCAL_PROTOCOL)
                     .setHost(LOCALHOST)
                     .setPort(0);
+            /**
+             * 提供者端的invoker封装了服务实现类、URL、Type，状态均是只读，线程安全，是Dubbo中核心模型，Dubbo中的是实体域，其他所有模型都向它靠拢或转化成它，
+             * 是一个可执行体，通过发起invoke来具体调用服务类，它可能是个本地实现类，也可能是个远程实现类，也可能是个集群实现invoker，
+             * 由ProxyFactory产生，具体是AbstractProxyInvoker
+             */
             Exporter<?> exporter = protocol.export(
                     proxyFactory.getInvoker(ref, (Class) interfaceClass, local));
             exporters.add(exporter);
